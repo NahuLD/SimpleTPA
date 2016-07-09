@@ -1,0 +1,60 @@
+lenguage: 'en_US'
+
+####################################################
+#      Welcome to the Lenguage configuration!      #
+#                                                  #
+# You can use the avaliable lenguages here, or you #
+# can create one and use it putting the lenguage   #
+# prefix in the 'lenguage:' section!               #
+#                                                  #
+# Feel free to send me the translation if you want #
+# to share it. (your name will be on contributors  #
+# section!)                                        #
+# Contact me via Skype or PM on Spigot :)          #
+#                                                  #
+# Skype: nahueldolores || Spigot: NahuLD           #
+#                                                  #
+# Regards, NahuLD                                  #
+####################################################
+
+en_US:
+    prefix: '&9TPA > '
+    
+    request:
+        deny:
+            requester: '&cYour petition to the player &7%requested% &chas been denied!'
+            requested: '&aDenied the teleport request for the player &7%requester%&a!'
+        recieved: '&aThe player &7%requester% &awants to teleport into your place!'
+        sent: '&aSent the teleport petition to the player &7%requested%&a!'
+        timed-out: '&cThe teleport request for &7%requested% &chas expired!'
+        accept: '&aTeleport request for &7%requester% &ahas been accepted!'
+        accepted: '&aYour teleport request for the player &7%requested% &ahas been accepted!'
+        teleporting: '&aTeleporting...'
+    error:
+        not-player: '&cYou must be a player in order to do this!'
+        syntax: '&cSyntax error: &7/tpa <player>'
+        already-sent: '&cYou can not send more than one teleport request at once!'
+        not-found: '&cThe player you are looking for cannot be found!'
+        no-petition: '&cYou do not have any teleport petition!'
+        no-permission: '&cYou do not have the permissions to use this commands!'
+        
+es_LA:
+    prefix: '&9TPA > '
+    
+    request:
+        deny:
+            requester: '&cTu petición al jugador &7%requested% &cha sido rechazada!'
+            requested: '&aHas rechazado la petición de teletransportación por &7%requester%&a!'
+        recieved: '&aEl jugador &7%requester% &aquiere teletransportarse a tu posicion!'
+        sent: '&aHas enviado la petición de teletransportación a &7%requested%&a!'
+        timed-out: '&cLa peticion de teletransportación para &7%requested% &cha expirado!'
+        accept: '&aPeticion de teletransportación para &7%requester% &aha sido aceptada!'
+        accepted: '&aTu petición de teletransportación para &7%requested% &aha sido aceptada!'
+        teleporting: '&aTeletransportando...'
+    error:
+        not-player: '&cDebes ser un jugador para hacer esto!'
+        syntax: '&cError de sintaxis: &7/tpa <player>'
+        already-sent: '&cNo puedes enviar mas de una invitación al mismo tiempo!'
+        not-found: '&cEl jugador que buscas no ha sido encontrado!'
+        no-petition: '&cNo tienes ninguna petición!'
+        no-permission: '&cNo tienes los suficientes permisos para utilizar este comando!'

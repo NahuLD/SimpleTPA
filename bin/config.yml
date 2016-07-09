@@ -1,0 +1,15 @@
+####################################################
+#    Welcome to SimpleTPA, a free utils plugin!    #
+#                                                  #
+# Please, if you enjoy the plugin leave a rate :)  #
+#                                                  #
+# Regards, NahuLD (on Spigot)                      #
+####################################################
+
+tpa:
+    request-delay: 60
+    particles-countdown: 5
+options:
+    particles: true
+    particle:
+        type: 'SPELL_WITCH'

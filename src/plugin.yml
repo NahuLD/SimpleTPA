@@ -1,0 +1,21 @@
+main: me.nahuld.simpletpa.Main
+name: SimpleTPA
+author: NahuLD
+version: 2.1.01
+description: Just a simple teleport plugin!
+
+commands:
+    tpa:
+        usage: /<command> [player]
+        description: Send a teleport request.
+    tpdeny:
+        usage: /<command>
+        description: Deny a teleport request.
+    tpaccept:
+        usage: /<command>
+        description: Accept a teleport request.
+        
+permissions:
+    simpletpa.tpa:
+        description: Allow you to send teleport requests.
+        default: true
