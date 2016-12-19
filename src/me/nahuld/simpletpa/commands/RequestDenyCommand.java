@@ -26,7 +26,7 @@ public class RequestDenyCommand implements CommandExecutor {
 		else {
 			Player requested = (Player) sender;
 
-			if (requested.hasPermission("simpletpa.tpa")) {
+			if (!requested.hasPermission("simpletpa.tpa")) {
 				requested.sendMessage(messager.getMessage("error.no-permission"));
 				return true;
 			}

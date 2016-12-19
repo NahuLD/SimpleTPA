@@ -19,7 +19,7 @@ public class Request implements Listener {
 	
 	private Main main;
 	
-	private Player requester, requested;
+	private Player requester, requested, teleported;
 	
 	private FileConfiguration config;
 	
@@ -30,10 +30,18 @@ public class Request implements Listener {
 	
 	private boolean particle;
 	
-	public Request(Main main, Player requester, Player requested) {
+	private RequestType type;
+	
+	public Request(Main main, Player requester, Player requested, RequestType type) {
 		this.main = main;
+		
+		this.type = type;
+		
 		this.requested = requested;
 		this.requester = requester;
+		
+		if (type == RequestType.GO_TO_REQUESTER) teleported = requested;
+		else teleported = requester;
 		
 		config = main.config().getConfig();
 		messager = main.messager();
@@ -46,20 +54,22 @@ public class Request implements Listener {
 		main.getServer().getPluginManager().registerEvents(this, main);
 	}
 	
+	public Player getRequester() { return requester; }
+	
+	public Player getRequested() { return requested; }
+	
 	private void end() {
 		try {
 			HandlerList.unregisterAll(this);
 			requested = null;
 			requester = null;
+			teleported = null;
+			type = null;
 			config = null;
 			messager = null;
 			main.manager().getRequests().remove(this);
 		} catch (Exception ex) { ex.printStackTrace(); }
 	}
-
-	public Player getRequester() { return requester; }
-	
-	public Player getRequested() { return requested; }
 	
 	public void deny() {
 		denied = true;
@@ -71,10 +81,10 @@ public class Request implements Listener {
 	}
 	
 	public void send() {
-
-		requested.sendMessage(messager.getMessage("request.recieved")
+		
+		requested.sendMessage(messager.getMessage("request.send." + type.getType() + ".requested")
 				.replace("%requester%", requester.getName()));
-		requester.sendMessage(messager.getMessage("request.sent")
+		requester.sendMessage(messager.getMessage("request.send." + type.getType() + ".requester")
 				.replace("%requested%", requested.getName()));
 		
 		new BukkitRunnable() {
@@ -103,15 +113,21 @@ public class Request implements Listener {
 	public void accept() {
 		accepted = true;
 		
-		requested.sendMessage(messager.getMessage("request.accept")
+		requested.sendMessage(messager.getMessage("request.accept.requested")
 				.replace("%requester%", requester.getName()));
-		requester.sendMessage(messager.getMessage("request.accepted")
+		requester.sendMessage(messager.getMessage("request.accept.requester")
 				.replace("%requested%", requested.getName()));
+		
+
+		Player location;
+		
+		if (type == RequestType.GO_TO_REQUESTED) location = requested;
+		else location = requester;
 		
 		if (config.getBoolean("options.particles")) {
 			particle = true;
 			showParticles();
-			requester.sendMessage(messager.getMessage("request.teleporting"));
+			teleported.sendMessage(messager.getMessage("request.teleporting"));
 			
 			new BukkitRunnable() {
 
@@ -123,7 +139,8 @@ public class Request implements Listener {
 					if (countdown <= 0) {
 						cancel();
 						particle = false;
-						requester.teleport(requested);
+						
+						teleported.teleport(location);
 						end();
 					}
 					countdown--;
@@ -132,7 +149,7 @@ public class Request implements Listener {
 			}.runTaskTimer(main, 0L, 20L);
 			
 		} else {
-			requester.teleport(requested);
+			teleported.teleport(location);
 			end();
 		}
 	}
@@ -158,8 +175,8 @@ public class Request implements Listener {
 
 				if (!particle) cancel();
 				
-				if (requester != null) {
-					Location location = requester.getLocation();
+				if (teleported != null) {
+					Location location = teleported.getLocation();
 					if (location != null) {
 						if (step > rings) { step = 0; }
 					
@@ -186,7 +203,8 @@ public class Request implements Listener {
 	@EventHandler
 	protected void onPlayerMove(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		if (player.equals(requester) && particle) {
+		
+		if (player.equals(teleported) && particle) {
 			event.setCancelled(true);
 		}
 	}

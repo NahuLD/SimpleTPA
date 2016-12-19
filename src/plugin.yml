@@ -1,21 +1,33 @@
 main: me.nahuld.simpletpa.Main
 name: SimpleTPA
 author: NahuLD
-version: 2.1.01
+version: 2.1.10
 description: Just a simple teleport plugin!
 
 commands:
     tpa:
         usage: /<command> [player]
-        description: Send a teleport request.
+        description: Send a teleport request to his location.
+    tpahere:
+        usage: /<command>
+        description: Send a teleport request to your location.
+    tptoggle:
+        usage: /<command>
+        description: Toggle the TPA function.
     tpdeny:
         usage: /<command>
         description: Deny a teleport request.
     tpaccept:
         usage: /<command>
         description: Accept a teleport request.
-        
+    simpletpareload:
+        usage: /<command>
+        description: Reload the configs
+        aliases: [stpareload,tpareload]
 permissions:
     simpletpa.tpa:
         description: Allow you to send teleport requests.
         default: true
+    simpletpa.reload:
+        description: Reload the configuration.
+        default: op

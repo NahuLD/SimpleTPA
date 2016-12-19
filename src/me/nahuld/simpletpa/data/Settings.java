@@ -1,6 +1,7 @@
 package me.nahuld.simpletpa.data;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,8 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.nahuld.simpletpa.Main;
 
-public class Config {
-	
+public class Settings {
 	private Main main;
 	
 	private File dataFolder;
@@ -17,14 +17,18 @@ public class Config {
 	
 	private FileConfiguration config;
 	
-	public Config(Main main) {
+	public Settings(Main main) {
 		this.main = main;
 		dataFolder = main.getDataFolder();
-		file = new File(dataFolder, "config.yml");
+		file = new File(dataFolder, "settings.yml");
 		
 		if (!dataFolder.exists()) dataFolder.mkdirs();
 		if (!file.exists())
-			main.saveResource("config.yml", false);
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		config = YamlConfiguration.loadConfiguration(file);
 		save();
 	}
@@ -33,7 +37,6 @@ public class Config {
 	
 	public void save() { 
 		try {
-			config = YamlConfiguration.loadConfiguration(file);
 			config.save(file);
 		} catch (Exception ex) {
 			main.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Error while saving: " + file.getName());

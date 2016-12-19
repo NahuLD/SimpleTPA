@@ -11,13 +11,15 @@ import me.nahuld.simpletpa.plugin.Request;
 import me.nahuld.simpletpa.plugin.RequestType;
 import me.nahuld.simpletpa.utils.Messager;
 
-public class RequestCommand implements CommandExecutor {
-
+public class RequestHereCommand implements CommandExecutor {
+	
 	private Main main;
 	
 	private Messager messager;
-	public RequestCommand(Main main) {
+	
+	public RequestHereCommand(Main main) {
 		this.main = main;
+		
 		messager = main.messager();
 	}
 	
@@ -44,11 +46,11 @@ public class RequestCommand implements CommandExecutor {
 					Player requested = Bukkit.getPlayer(args[0]);
 				
 					if (requested != null) {
-
+						
 						if (main.getToggled().contains(requested.getUniqueId()))
 							requester.sendMessage(messager.getMessage("error.tp-disabled"));
 						else {
-							Request request = new Request(main, requester, requested, RequestType.GO_TO_REQUESTED);
+							Request request = new Request(main, requester, requested, RequestType.GO_TO_REQUESTER);
 							request.send();
 					
 							main.manager().getRequests().add(request);
@@ -60,4 +62,5 @@ public class RequestCommand implements CommandExecutor {
 		
 		return true;
 	}
+
 }

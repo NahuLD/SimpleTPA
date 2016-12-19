@@ -5,24 +5,28 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.nahuld.simpletpa.Main;
+import me.nahuld.simpletpa.data.Utf8YamlConfiguration;
 
 public class Messager {
 
-    private final FileConfiguration storage;
+    private FileConfiguration storage;
     private String LENGUAGE = "en_US.";
+    private File storageFile;
+    
+    private Main main;
 
     public Messager(Main main) {
-        File storageFile = new File(main.getDataFolder(), "lang.yml");
+    	this.main = main;
+        storageFile = new File(main.getDataFolder(), "lang.yml");
 
         if (!storageFile.exists()) {
         	main.saveResource("lang.yml", false);
         }
 
-        storage = YamlConfiguration.loadConfiguration(storageFile);
-        LENGUAGE = storage.getString("lenguage") + ".";
+        storage = Utf8YamlConfiguration.loadConfiguration(storageFile);
+        LENGUAGE = storage.getString("language") + ".";
     }
 
     public String stripColor(String input) {
@@ -43,5 +47,14 @@ public class Messager {
     
     public String getText(String format) {
     	return ChatColor.translateAlternateColorCodes('&', storage.getString(LENGUAGE + format));
+    }
+    
+    public void save() {
+		try {
+	        storage = Utf8YamlConfiguration.loadConfiguration(storageFile);
+			storage.save(storageFile);
+		} catch (Exception ex) {
+			main.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Error while saving: " + storageFile.getName());
+		}
     }
 }

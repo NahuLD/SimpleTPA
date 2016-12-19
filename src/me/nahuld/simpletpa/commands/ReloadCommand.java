@@ -6,38 +6,35 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.nahuld.simpletpa.Main;
-import me.nahuld.simpletpa.plugin.Request;
 import me.nahuld.simpletpa.utils.Messager;
 
-public class RequestAcceptCommand implements CommandExecutor {
-
-	private Main main;
+public class ReloadCommand implements CommandExecutor {
 	
 	private Messager messager;
-	public RequestAcceptCommand(Main main) {
+	private Main main;
+	
+	public ReloadCommand(Main main) {
 		this.main = main;
 		messager = main.messager();
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		
 
 		if (!(sender instanceof Player)) sender.sendMessage(messager.getMessage("error.not-player"));
 		else {
-			Player requested = (Player) sender;
+			Player player = (Player) sender;
 			
-			if (!requested.hasPermission("simpletpa.tpa")) {
-				requested.sendMessage(messager.getMessage("error.no-permission"));
-				return true;
+			if (!player.hasPermission("simpletpa.reload")) player.sendMessage(messager.getMessage("error.no-permission"));
+			else {
+				main.config().save();
+				main.messager().save();
+				player.sendMessage(messager.getMessage("success.reload-config"));
 			}
 			
-			Request request = main.manager().getRequested(requested);
-			if (request != null) {
-				request.accept();
-			} else requested.sendMessage(messager.getMessage("error.no-petition"));
 		}
 		
 		return true;
 	}
+
 }
