@@ -22,7 +22,7 @@ language: 'en_US'
 #   Translation contributors:                      #
 #   - A248 (improved the english lang!)            #
 #   - St0rmy (added Deutsch translation)           #
-#   - Proximyst (added Norsk bokmål)               #
+#   - Proximyst (added Norsk bokmål & nynorsk)     #
 #                                                  #
 #   Special thanks for translating it! (applause)  #
 ####################################################
@@ -86,6 +86,36 @@ no_NB:
     success:
         reload-config: '&aAlle konfigurasjoner har blitt omlastet!'
         toggle: '&aDen valgte funksjonen har blitt: &c%boolean%'
+no_NN:
+    prefix: '&9TPA > '
+    
+    request:
+        deny:
+            requester: '&cDin førespurnad til spillaren &7%requested% &cvart avslege!'
+            requested: '&aDu avslo førespurnaden frå &7%requester%&a!'
+        send:
+            normal:
+                requester: '&aDu sende ein teleporteringsførespurnad til &7%requested%&a!'
+                requested: '&aSpillaren &7%requester% &avil teleportera til deg!'
+            here:
+                requester: '&aSende ein teleporteringsførespurnad til &7%requested%&a om å kjema her!'
+                requested: '&aSpillaren &7%requester% &avil du skal teleportera til dei!'
+        accept:
+            requester: '&aTeleporteringsførespurnaden til &7%requested% &avart innvilga!'
+            requested: '&aTeleporteringsførespurnaden til &7%requester% &avart innvilga!'
+        timed-out: '&cTeleporteringsførespurnaden til &7%requested% &cgjekk ut!'
+        teleporting: '&aTeleporterar...'
+    error:
+        not-player: '&cDu må vere ein spillar for å utføra dette!'
+        syntax: '&cFeil i kommandoen: &7/tpa <spillar> | /tpahere <spillar>'
+        already-sent: '&cDu kan ikkje senda meir enn ein teleporteringsførespurnad om gongen!'
+        not-found: '&cSpilleran du ser etter finst ikkje!'
+        no-petition: '&cDu har ingen utgåande teleporteringsførespurnadar!'
+        no-permission: '&cDu har ikkje tilgong til å utføra denne kommandoen!'
+        tp-disabled: '&cDen spilleran har teleportering avslegen!'
+    success:
+        reload-config: '&aAlle konfigurasjoner blei omlasta!'
+        toggle: '&aDen valte funksjonen blei: &c%boolean%'
 de_DE:
     prefix: '&9[TPA] '
     
