@@ -147,3 +147,33 @@ es_LA:
     success:
         reload-config: '&aTodas las configuraciones fueron recargadas!'
         toggle: '&aFuncion de TPA: &c%boolean%'
+pt_BR:
+    prefix: '&9TPA > '
+    
+    request:
+        deny:
+            requester: '&cSua solicitação para o jogador &7%requested% &cfoi recusada!'
+            requested: '&aRecusada solicitação de teleporte do jogador &7%requester%&a!'
+        send:
+            normal:
+                requester: '&aEnviada solicitação de teleporte para o jogador &7%requested%&a!'
+                requested: '&7%requester% &aquer teleportar para você!'
+            here:
+                requester: '&aEnviada solicitação de teleporte para o jogador &7%requested%&a!'
+                requested: '&7%requester% &aquer teleportá-lo para sua posição!'
+        accept:
+            requester: '&aSua solicitação de teleporte para o &7%requested% &afoi aceita!'
+            requested: '&aSolicitação de teleporte de &7%requester% &aaceita!'
+        timed-out: '&cA solicitação de teleporte de &7%requested% &cexpirou!'
+        teleporting: '&aTeleportando...'
+    error:
+        not-player: '&cVocê deve ser um jogador para fazer isso!'
+        syntax: '&cErro de Sintaxe: &7/tpa <jogador> | /tpahere <jogador>'
+        already-sent: '&cVocê não pode solicitar um teleporte mais de uma vez!'
+        not-found: '&cO jogador que você está procurando não existe!'
+        no-petition: '&cVocê não tem solicitações pendentes!'
+        no-permission: '&cVocê não tem permissão para usar esse comando!'
+        tp-disabled: '&cEsse jogador desativou teleportes!'
+    success:
+        reload-config: '&aConfigurações recarregadas!'
+        toggle: '&aFunção alternativa configurada para &c%boolean%'
